@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: http-service-2
+  namespace: highlevel-prod
+  labels:
+    app: http-2
+spec:
+  selector:
+    app: http-2
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: http-deployment-2
+  namespace: highlevel-prod
+  labels:
+    app: http-2
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: http-2
+  template:
+    metadata:
+      labels:
+        app: http-2
+    spec:
+      containers:
+      - name: webpage
+        image: kapilmodi/highlevel:2.0
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-lb-2
+  namespace: highlevel-prod
+spec:
+  selector:
+    app: http-2
+  ports:
+    - port: 80
+      targetPort: 80
+  externalTrafficPolicy: Local
+  type: LoadBalancer
+  
