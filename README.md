@@ -24,10 +24,15 @@ kapilmodi/aws-agent:1.0      -> Agent which have basic tools installed like aws,
 7) Add a new <B>Weighted Record</B>. Give the following values
 
     a) Type: A
+
        Endpoint: ###FIRST LOADBALANCER ENDPOINT FROM STEP 5
+
        Weight: 7
+
     b) Type: A
+
        Endpoint: ###SECOND LOADBALANCER ENDPOINT FROM STEP 5
+
        Weight: 3
 
 8) Save Changes
